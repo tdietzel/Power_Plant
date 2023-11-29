@@ -48,4 +48,12 @@ describe("checkDead", () => {
         const newRose = checkDead(activeFlower);
         expect(newRose).toEqual({name: "rose",water:5,dead:false})
     });
+    // test #2
+    test("return true if plant is dead", () => {
+        const rose = createPlant("rose");
+        const activateFlower = changeState("water")(0);
+        const activeFlower = activateFlower(rose);
+        const newRose = checkDead(activeFlower);
+        expect(newRose).toEqual({name: "rose",water:0,dead:true})
+    });
 });
