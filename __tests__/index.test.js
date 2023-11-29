@@ -1,8 +1,8 @@
-import {createPlant, changeState, storeState} from "../src/plant.js"
+import {createPlant, changeState, storeState, assignState} from "../src/plant.js"
 
 describe("createPlant", () => {
     // test #1
-    test("create a plant object with a name property and value equal to plantName", () => {
+    test("create a plant object with a name prop and value equal to plantName", () => {
         const rose = createPlant("rose")
         expect(rose).toEqual({name:"rose"})
     });
@@ -10,7 +10,7 @@ describe("createPlant", () => {
 
 describe("changeState", () => {
     // test #1
-    test("add water property to rose with a value of 5", () => {
+    test("add or update a prop &|| value to state", () => {
         const rose = createPlant("rose")
         const waterPlant = changeState("water")(5)
         const wateredRose = waterPlant(rose)
@@ -21,9 +21,20 @@ describe("changeState", () => {
 describe("storeState", () => {
     // test #1
     test("return stored state according to the change added", () => {
-        const stateControl = storeState();
-        const addSeed = changeState("seed")(1);
-        const newState = stateControl(addSeed);
-        expect(newState).toEqual({seed:1});
+        const stateControl = storeState()
+        const addSeed = changeState("seed")(1)
+        const newState = stateControl(addSeed)
+        expect(newState).toEqual({seed:1})
+    });
+});
+
+describe("assignState", () => {
+    // test #1
+    test("add a prop to state and assign its prop to a value", () => {
+        const iris = createPlant("iris")
+        expect(iris).toEqual({name:"iris"})
+        const makeRed = assignState("color")("red")
+        makeRed(iris)
+        expect(iris).toEqual({name:"iris",color:"red"})
     });
 });

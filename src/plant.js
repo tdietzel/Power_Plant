@@ -1,3 +1,12 @@
+export const assignState = (prop) => {
+  return (value) => {
+    return (state) => ({
+      ...state,
+      [prop]: (state[prop]) = value
+    });
+  }
+}
+
 export const storeState = () => {
   let currentState = {};
   return (stateChangeFunction = state => state) => {
