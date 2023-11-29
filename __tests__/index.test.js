@@ -1,4 +1,4 @@
-import {createPlant, changeState, storeState, assignState} from "../src/plant.js"
+import {createPlant, changeState, storeState, assignState, checkDead} from "../src/plant.js"
 
 describe("createPlant", () => {
     // test #1
@@ -36,5 +36,16 @@ describe("assignState", () => {
         const makeRed = assignState("color")("red")
         makeRed(iris)
         expect(iris).toEqual({name:"iris",color:"red"})
+    });
+});
+
+describe("checkDead", () => {
+    // test #1
+    test("return false if plant isnt dead", () => {
+        const rose = createPlant("rose");
+        const activateFlower = changeState("water")(5);
+        const activeFlower = activateFlower(rose);
+        const newRose = checkDead(activeFlower);
+        expect(newRose).toEqual({name: "rose",water:5,dead:false})
     });
 });
