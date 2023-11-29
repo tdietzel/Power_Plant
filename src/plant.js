@@ -1,3 +1,12 @@
+export const storeState = () => {
+  let currentState = {};
+  return (stateChangeFunction = state => state) => {
+    const newState = stateChangeFunction(currentState);
+    currentState = {...newState};
+    return newState;
+  }
+}
+
 export const createPlant = (plantName) => {
   const plant = {
     name: plantName
@@ -6,10 +15,10 @@ export const createPlant = (plantName) => {
 };
 
 export const changeState = (prop) => {
-    return (value) => {
-        return (state) => ({
-            ...state,
-            [prop]: (state[prop] || 0) + value
-        });
-    }
+  return (value) => {
+    return (state) => ({
+      ...state,
+      [prop]: (state[prop] || 0) + value
+    });
+  }
 }
